@@ -34,7 +34,7 @@ import { bugs, website, server } from "variables/general.js";
 import {
   dailySalesChart,
   emailsSubscriptionChart,
-  completedTasksChart
+  completedTasksChart,
 } from "variables/charts.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
@@ -52,18 +52,15 @@ export default function Dashboard() {
               <CardIcon color="warning">
                 <Icon>content_copy</Icon>
               </CardIcon>
-              <p className={classes.cardCategory}>Used Space</p>
+              <p className={classes.cardCategory}>Result</p>
               <h3 className={classes.cardTitle}>
-                49/50 <small>GB</small>
+                3042 <small>result</small>
               </h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
-                <Danger>
-                  <Warning />
-                </Danger>
-                <a href="#pablo" onClick={e => e.preventDefault()}>
-                  Get more space
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                  See more
                 </a>
               </div>
             </CardFooter>
@@ -75,18 +72,45 @@ export default function Dashboard() {
               <CardIcon color="success">
                 <Store />
               </CardIcon>
-              <p className={classes.cardCategory}>Revenue</p>
-              <h3 className={classes.cardTitle}>$34,245</h3>
+              <p className={classes.cardCategory}>Student</p>
+              <h3 className={classes.cardTitle}>
+                3200 <small>student</small>
+              </h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
-                <DateRange />
-                Last 24 Hours
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                  See more
+                </a>
               </div>
             </CardFooter>
           </Card>
         </GridItem>
+
         <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="danger" stats icon>
+              <CardIcon color="danger">
+                <Icon>info_outline</Icon>
+              </CardIcon>
+              <p className={classes.cardCategory}>Special results</p>
+              <h3 className={classes.cardTitle}>
+                30 <small>result</small>
+              </h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Danger>
+                  <Warning />
+                </Danger>
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                  See more
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        {/* <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
@@ -119,10 +143,10 @@ export default function Dashboard() {
               </div>
             </CardFooter>
           </Card>
-        </GridItem>
+        </GridItem> */}
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
+        {/* <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="success">
               <ChartistGraph
@@ -148,7 +172,7 @@ export default function Dashboard() {
               </div>
             </CardFooter>
           </Card>
-        </GridItem>
+        </GridItem> */}
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="warning">
@@ -162,12 +186,12 @@ export default function Dashboard() {
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
+              <h4 className={classes.cardTitle}>Result in Month</h4>
+              {/* <p className={classes.cardCategory}>Last Campaign Performance</p> */}
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> campaign sent 2 days ago
+                <AccessTime />
               </div>
             </CardFooter>
           </Card>
@@ -184,82 +208,38 @@ export default function Dashboard() {
               />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Completed Tasks</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
+              <h4 className={classes.cardTitle}>Temperature in day</h4>
+              {/* <p className={classes.cardCategory}>Last Campaign Performance</p> */}
             </CardBody>
             <CardFooter chart>
               <div className={classes.stats}>
-                <AccessTime /> campaign sent 2 days ago
+                <AccessTime />
               </div>
             </CardFooter>
           </Card>
         </GridItem>
-      </GridContainer>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
-          <CustomTabs
-            title="Tasks:"
-            headerColor="primary"
-            tabs={[
-              {
-                tabName: "Bugs",
-                tabIcon: BugReport,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3]}
-                    tasks={bugs}
-                  />
-                )
-              },
-              {
-                tabName: "Website",
-                tabIcon: Code,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0]}
-                    tasksIndexes={[0, 1]}
-                    tasks={website}
-                  />
-                )
-              },
-              {
-                tabName: "Server",
-                tabIcon: Cloud,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[1]}
-                    tasksIndexes={[0, 1, 2]}
-                    tasks={server}
-                  />
-                )
-              }
-            ]}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12} sm={12} md={4}>
           <Card>
             <CardHeader color="warning">
-              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
-              <p className={classes.cardCategoryWhite}>
-                New employees on 15th September, 2016
-              </p>
+              <h4 className={classes.cardTitleWhite}>Result</h4>
+              <p className={classes.cardCategoryWhite}>Temperature student</p>
             </CardHeader>
             <CardBody>
               <Table
                 tableHeaderColor="warning"
-                tableHead={["ID", "Name", "Salary", "Country"]}
+                tableHead={["ID", "Name", "Class", "temperature"]}
                 tableData={[
-                  ["1", "Dakota Rice", "$36,738", "Niger"],
-                  ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-                  ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-                  ["4", "Philip Chaney", "$38,735", "Korea, South"]
+                  ["1", "Mai Thế Viễn", "18TCLC_DT2", "40 °C"],
+                  ["2", "Huỳnh Trần 4 Chữ", "18TCLC_DT3", "42 °C"],
+                  ["3", "Nguyễn Phước Quốc", "18TCLC_DT22", "43 °C"],
+                  ["4", "Nguyễn Nguyên Hoàng", "18TCLC_DT2", "41 °C"],
                 ]}
               />
             </CardBody>
           </Card>
         </GridItem>
       </GridContainer>
+      <GridContainer></GridContainer>
     </div>
   );
 }
