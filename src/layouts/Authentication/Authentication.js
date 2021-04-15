@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,6 +14,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
 import "./Authentication.scss";
+import AuthenticationService from "../../config/API/User/AuthenticationService";
+import Swal from "sweetalert2";
 
 function Copyright() {
   return (
@@ -52,8 +54,39 @@ export default function Authentication() {
   const history = useHistory();
   const classes = useStyles();
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    let checkLogin = AuthenticationService.isLogin();
+    if (checkLogin) {
+      history.replace("/admin");
+    }
+  });
   const handleLogin = () => {
-    history.push("/admin");
+    let params = {
+      username: username,
+      password: password,
+    };
+
+    AuthenticationService.postLogin(params)
+      .then((res) => {
+        if (res.dataString === "success") {
+          AuthenticationService.saveDataLogin(res.token);
+          history.replace("/admin");
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Login unsuccessful",
+            showConfirmButton: false,
+            timer: 2500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -81,6 +114,7 @@ export default function Authentication() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={(event) => setUsername(event.target.value)}
           />
           <TextField
             variant="outlined"
@@ -92,13 +126,13 @@ export default function Authentication() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(event) => setPassword(event.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
