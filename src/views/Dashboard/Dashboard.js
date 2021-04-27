@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -38,11 +38,20 @@ import {
 } from "variables/charts.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import ResultService from "../../config/API/Result/ResultService";
+import { ModuleResolutionKind } from "typescript";
 
 const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
   const classes = useStyles();
+  const [result, setResult] = useState();
+
+  useEffect(() => {
+    ResultService.getResult().then((res) => {
+      setResult(res.data);
+    });
+  }, []);
   return (
     <div>
       <GridContainer>
@@ -54,7 +63,7 @@ export default function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Result</p>
               <h3 className={classes.cardTitle}>
-                3042 <small>result</small>
+                {result ? result.length : null} <small>result</small>
               </h3>
             </CardHeader>
             <CardFooter stats>

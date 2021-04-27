@@ -21,10 +21,6 @@ function APIPost(url, params) {
 
 function APIPut(url, params) {
   url = IP + url;
-  //   if (AuthenticationService.isLogin()) {
-  //     let data = JSON.parse(localStorage.getItem("@Login"));
-  //     header.Authorization = data.type + " " + data.token;
-  //   }
   return fetch(url, {
     method: "PUT",
     headers: header,
