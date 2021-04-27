@@ -46,10 +46,15 @@ const useStyles = makeStyles(styles);
 export default function Dashboard() {
   const classes = useStyles();
   const [result, setResult] = useState();
+  const [ResultWarning, setResultWarning] = useState();
 
   useEffect(() => {
     ResultService.getResult().then((res) => {
       setResult(res.data);
+    });
+    ResultService.getResultWarning().then((res) => {
+      console.log(res.data);
+      setResultWarning(res.data);
     });
   }, []);
   return (
@@ -104,7 +109,8 @@ export default function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Special results</p>
               <h3 className={classes.cardTitle}>
-                30 <small>result</small>
+                {ResultWarning ? ResultWarning.length : null}{" "}
+                <small>result</small>
               </h3>
             </CardHeader>
             <CardFooter stats>
